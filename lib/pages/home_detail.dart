@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app1/models/catalog.dart';
-import 'package:flutter_app1/widgets/theme.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class HomeDetailsPage extends StatelessWidget {
@@ -11,26 +10,8 @@ class HomeDetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: MyTheme.creamColor,
-      appBar: AppBar(),
-      bottomNavigationBar: Container(
-        color: Colors.white,
-        child: ButtonBar(
-          alignment: MainAxisAlignment.spaceBetween,
-          buttonPadding: EdgeInsets.zero,
-          children: [
-            "\$${catalog.price}".text.bold.xl4.red800.make(),
-            ElevatedButton(
-              onPressed: () {},
-              style: ButtonStyle(
-                  backgroundColor:
-                      MaterialStateProperty.all(MyTheme.darkBluishColor),
-                  shape: MaterialStateProperty.all(StadiumBorder())),
-              child: "Buy".text.make(),
-            ).wh(100, 50),
-          ],
-        ).p32(),
-      ),
+      backgroundColor: context.canvasColor,
+      appBar: AppBar(backgroundColor: Colors.transparent),
       body: SafeArea(
         bottom: false,
         child: Column(
@@ -45,12 +26,12 @@ class HomeDetailsPage extends StatelessWidget {
                 arcType: VxArcType.CONVEY,
                 edge: VxEdge.TOP,
                 child: Container(
-                  color: Colors.white,
+                  color: context.cardColor,
                   width: context.screenWidth,
                   child: Column(
                     children: [
                       catalog.name.text.xl4
-                          .color(MyTheme.darkBluishColor)
+                          .color(context.accentColor)
                           .bold
                           .make(),
                       catalog.desc.text
@@ -58,6 +39,11 @@ class HomeDetailsPage extends StatelessWidget {
                           .xl
                           .make(),
                       10.heightBox,
+                      "A falsis, ausus teres zirbus.The disconnection is an evil green people.  falsis, ausus teres zirbus.The disconnection is an evil green people.  falsis, ausus teres zirbus.The disconnection is an evil green people.  falsis, ausus teres zirbus.The disconnection is an evil green people."
+                          .text
+                          .textStyle(context.captionStyle!)
+                          .make()
+                          .p16(),
                     ],
                   ).py64(),
                 ),
@@ -65,6 +51,24 @@ class HomeDetailsPage extends StatelessWidget {
             )
           ],
         ),
+      ),
+      bottomNavigationBar: Container(
+        color: context.cardColor,
+        child: ButtonBar(
+          alignment: MainAxisAlignment.spaceBetween,
+          buttonPadding: EdgeInsets.zero,
+          children: [
+            "\$${catalog.price}".text.bold.xl4.red800.make(),
+            ElevatedButton(
+              onPressed: () {},
+              style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateProperty.all(context.theme.buttonColor),
+                  shape: MaterialStateProperty.all(StadiumBorder())),
+              child: "Add to cart".text.make(),
+            ).wh(120, 50),
+          ],
+        ).p32(),
       ),
     );
   }
