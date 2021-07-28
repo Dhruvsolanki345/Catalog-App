@@ -12,13 +12,13 @@ class _LoginState extends State<Login> {
   bool changeButton = false;
   final _formkey = GlobalKey<FormState>();
 
-  moveToHome(context) async {
+  moveToHome(BuildContext context) async {
     if (_formkey.currentState!.validate()) {
       setState(() {
         changeButton = true;
       });
       await Future.delayed(Duration(seconds: 1));
-      await Navigator.pushNamed(context, MyRoutes.homeRoute);
+      await context.vxNav.push(Uri.parse(MyRoutes.homeRoute));
       setState(() {
         changeButton = false;
       });
